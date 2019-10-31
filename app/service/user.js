@@ -61,6 +61,22 @@ class UserService extends Service {
       },
     });
   }
+
+  /**
+   * 根据ID查找用户
+   * @param {String} id 用户ID
+   */
+  async getUserById(id) {
+    if (!id) {
+      return null;
+    }
+
+    return await this.ctx.model.User.findOne({
+      where: {
+        id,
+      },
+    });
+  }
 }
 
 module.exports = UserService;

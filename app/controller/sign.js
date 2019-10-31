@@ -92,10 +92,22 @@ class SignController extends Controller {
     const user = await ctx.service.user.getUserByCompleteName(name);
 
     if (user) {
+      if (user.passport === passport) {
+        ctx.body = {
+          code: 'SUCCESS',
+          msg: '登录成功',
+        };
+
+        ctx.session.user = {
+          id: user.id,
+          name: user.name,
+        };
+        return;
+      }
+
       ctx.body = {
-        code: 'SUCCESS',
-        msg: '登录成功',
-        user,
+        code: 'FAIL',
+        msg: '账号密码错误',
       };
 
       return;
@@ -105,6 +117,11 @@ class SignController extends Controller {
       code: 'FAIL',
       msg: '没有该用户',
     };
+  }
+
+  async logout() {
+    this.ctx.session = null;
+    this.ctx.redirect('/');
   }
 }
 
