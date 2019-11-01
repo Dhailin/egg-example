@@ -10,14 +10,14 @@ class SignController extends Controller {
     const {
       name,
       email,
-      passport,
+      password,
     } = ctx.request.body;
 
     let msg = '';
     let user;
 
     msg = validate.validUserName(name) ? validate.validUserName(name) : msg;
-    msg = validate.validPassport(passport) ? validate.validPassport(passport) : msg;
+    msg = validate.validPassword(password) ? validate.validPassword(password) : msg;
     msg = validate.validEmail(email) ? validate.validEmail(email) : msg;
 
     const isValid = _.isEmpty(msg);
@@ -57,7 +57,7 @@ class SignController extends Controller {
 
     await ctx.service.user.createUser({
       name,
-      passport,
+      password,
       email,
     });
 
@@ -71,13 +71,13 @@ class SignController extends Controller {
     const ctx = this.ctx;
     const {
       name,
-      passport,
+      password,
     } = ctx.request.body;
 
     let msg = '';
 
     msg = validate.validUserName(name) ? validate.validUserName(name) : msg;
-    msg = validate.validPassport(passport) ? validate.validPassport(passport) : msg;
+    msg = validate.validPassword(password) ? validate.validPassword(password) : msg;
 
     const isValid = _.isEmpty(msg);
 
@@ -92,7 +92,7 @@ class SignController extends Controller {
     const user = await ctx.service.user.getUserByCompleteName(name);
 
     if (user) {
-      if (user.passport === passport) {
+      if (user.password === password) {
         ctx.body = {
           code: 'SUCCESS',
           msg: '登录成功',

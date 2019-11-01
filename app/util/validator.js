@@ -32,16 +32,16 @@ module.exports = {
 
   /**
    * 验证密码
-   * @param {String} passport 密码
+   * @param {String} password 密码
    */
-  validPassport(passport) {
-    passport = _.trim(passport);
+  validPassword(password) {
+    password = _.trim(password);
 
-    if (this.isEmpty(passport)) {
+    if (this.isEmpty(password)) {
       return '密码不能为空';
     }
 
-    if (passport.length < 6 || passport.length > 16) {
+    if (password.length < 6 || password.length > 16) {
       return '密码长度为6-16位';
     }
 

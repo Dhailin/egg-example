@@ -4,9 +4,9 @@ const Service = require('egg').Service;
 const Op = require('sequelize').Op;
 
 class UserService extends Service {
-  async createUser({ name, email, passport }) {
+  async createUser({ name, email, password }) {
     const user = await this.app.model.User.create({
-      name, email, passport,
+      name, email, password,
     });
 
     return user;
@@ -39,11 +39,13 @@ class UserService extends Service {
       return null;
     }
 
-    return await this.ctx.model.User.findOne({
+    const user = await this.ctx.model.User.findOne({
       where: {
         name,
       },
     });
+
+    return user;
   }
 
   /**
@@ -74,6 +76,26 @@ class UserService extends Service {
     return await this.ctx.model.User.findOne({
       where: {
         id,
+      },
+    });
+  }
+
+  /**
+   * 删除用户根据用户名和密码来判断
+   * @param {String} name 用户名
+   * @param {String} password 密码
+   */
+  async deleteUserByNameAndPassword(name, password) {
+    if (!name || !password) {
+      return null;
+    }
+
+    return await this.ctx.model.User.destroy({
+      where: {
+        [Op.and]: [{
+          name,
+          password,
+        }],
       },
     });
   }

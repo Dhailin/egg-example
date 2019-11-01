@@ -5,11 +5,12 @@ const Controller = require('egg').Controller;
 class UserController extends Controller {
   async createUser() {
     const ctx = this.ctx;
-    const { name, email } = ctx.request.body;
+    const { name, email, password } = ctx.request.body;
 
     const user = await this.service.user.createUser({
       name,
       email,
+      password,
     });
 
     ctx.status = 200;
