@@ -16,12 +16,14 @@ module.exports = {
       name: STRING(30),
       email: STRING,
       password: STRING,
-      createdAt: { type: DATE },
-      updatedAt: { type: DATE },
+      createdAt: { type: DATE, field: 'created_at' },
+      updatedAt: { type: DATE, field: 'updated_at' },
+    }, {
+      timestamps: true,
     });
   },
 
-  down: queryInterface => {
+  down: async queryInterface => {
     /*
       Add reverting commands here.
       Return a promise to correctly handle asynchronicity.
@@ -29,6 +31,6 @@ module.exports = {
       Example:
       return queryInterface.dropTable('users');
     */
-    return queryInterface.dropTable('users');
+    await queryInterface.dropTable('users');
   },
 };
