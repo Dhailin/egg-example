@@ -9,9 +9,9 @@ module.exports = app => {
     id: { type: INTEGER, primaryKey: true, autoIncrement: true },
     name: STRING(30),
     email: STRING,
-    passport: STRING,
-    createdAt: { type: DATE },
-    updatedAt: { type: DATE },
+    password: STRING,
+    createdAt: { type: DATE, field: 'created_at' },
+    updatedAt: { type: DATE, field: 'updated_at' },
   }, {
     timestamps: true,
   });
