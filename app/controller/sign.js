@@ -107,7 +107,7 @@ class SignController extends Controller {
 
       ctx.body = {
         code: 'FAIL',
-        msg: '账号密码错误',
+        msg: '账号或密码错误',
       };
 
       return;
