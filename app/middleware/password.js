@@ -4,9 +4,12 @@ module.exports = () => {
   return async function(ctx, next) {
     const url = ctx.url;
 
-    if (url === '/sign/signIn') {
-      await next();
-      return;
+    if (url === '/') {
+      return await next();
+    }
+
+    if (url.indexOf('/sign') !== -1) {
+      return await next();
     }
 
     const session = ctx.session;
