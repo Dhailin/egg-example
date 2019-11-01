@@ -15,6 +15,7 @@ module.exports = {
       id: { type: INTEGER, primaryKey: true, autoIncrement: true },
       name: STRING(30),
       email: STRING,
+      password: STRING,
       createdAt: { type: DATE },
       updatedAt: { type: DATE },
     });
