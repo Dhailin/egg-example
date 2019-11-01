@@ -15,6 +15,7 @@ module.exports = () => {
     const session = ctx.session;
 
     if (!session.user) {
+      ctx.status = 401;
       ctx.body = {
         code: 'FAIL',
         msg: '没有登录',
